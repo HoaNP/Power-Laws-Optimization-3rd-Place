@@ -1,38 +1,42 @@
-<a href="https://www.drivendata.org/competitions/53/optimize-photovoltaic-battery/">
-    <img src="https://s3.amazonaws.com/drivendata-public-assets/se-challenge-3-banner.jpg"/>
-</a>
+# 🏆 Power Laws: Optimizing Demand-side Strategies (3rd Place Solution)
 
-# Power Laws: Optimizing Demand-side Strategies
+This repository contains the **3rd place winning solution** for the [Power Laws: Optimizing Demand-side Strategies](https://www.drivendata.org/competitions/53/optimize-photovoltaic-battery/) competition hosted by DrivenData.
 
-Flexibility can be defined as "the ability of a resource, whether any component or collection of components of the power system, to respond to the known and unknown changes of power system conditions at various operational timescales".1 The exploitation of flexibility is essential to avoid costly reinforcements of the power system and maintain security of supply while increasing the penetration of renewable (and intermittent) sources of energy.
+## 🌟 Achievement
+* **Rank:** 3rd Place worldwide out of 350+ participants.
+* **Winner Spotlight:** Featured in the official DrivenData blog post: [Meet the Winners: Power Laws Optimization](https://drivendata.co/blog/power-laws-optimization-winners).
 
-Flexibility can be produced in different manners. It might come from generation options, from energy storage or from energy demand. In some cases, generation can also be proposed through alternative dispatchable assets such as Combined Heat and Power (CHP). Storage is valid for both electricity and heat. Energy storage is an easy way to increase building flexibility, provided there is a business case for such an investment. The present challenge is focused on making a good usage of an installed storage system.
+## 📖 Project Overview
+The goal of this competition was to develop an algorithm to optimize the charging and discharging of a battery system. The objective is to minimize electricity costs for a building by effectively using solar energy (PV) and managing grid consumption based on load forecasts.
 
-Viewed from the demand side, in the case of smart buildings, time of use tariffs incite to use energy when it is the most available. Given such a tariff, the goal is to buy more energy when its price is the lowest, and buy less (or possibly sell) energy when its price is the highest.
+## 🛠 Technical Approach
+Our solution focuses on robust optimization using Linear Programming to handle the uncertainty of energy forecasts.
 
-The goal in this competition is to build an algorithm that controls a battery charging system and spends the least amount of money over a simulation period.
+### 1. Linear Programming Model
+We formulated the battery control problem as a Linear Programming (LP) model using **Google OR-Tools** with the **GLOP solver**.
+* **Objective:** Minimize the total cost of energy purchased from the grid over a given horizon.
+* **Constraints:** We integrated battery capacity limits, charge/discharge efficiency, and power limits as primary constraints.
 
-## What's in this Repository
+### 2. Strategy for Uncertainty (Scattering)
+To mitigate the risk of forecast errors, we implemented a "scattering" technique. Instead of aggressive charging or discharging based on potentially inaccurate future points, the energy is distributed across multiple steps to avoid superfluous grid purchases.
 
-This repository contains code from winning competitors in the [Power Laws: Optimizing Demand-side Strategies](https://www.drivendata.org/competitions/53/optimize-photovoltaic-battery/) DrivenData challenge. Code for all winning solutions are open source under the MIT License.
+### 3. Data Refinement
+* **PV Forecast Cleaning:** We implemented logic to filter noise in PV forecasts, such as setting values below 20 (often found at midnight in raw forecasts) to zero to prevent irrational battery behavior.
 
-**Winning code for other DrivenData competitions is available in the [competition-winners repository](https://github.com/drivendataorg/competition-winners).**
+## 📂 Repository Structure
+* `solution/`: Core logic including `battery_controller.py`.
+* `simulation_engine/`: The environment provided by DrivenData to test and evaluate the model.
+* `docs/`: Full technical documentation and methodology write-up.
 
-This repository also contains the simulation engine code provided to competitors for testing their solutions. You can find the simulation engine code in the [`simulation_engine/`](simulation_engine/) subdirectory—see that subdirectory's README for more information. This code is also open source under the MIT License.
+## 🚀 How to Run
+1.  **Install dependencies:**
+    ```bash
+    pip install ortools
+    ```
+    *(Note: See `simulation_engine/requirements.txt` for full environment setup)*
+2.  **Execute simulation:**
+    Navigate to the `simulation_engine` directory and run the engine to see the controller in action.
 
-## Final Results
-
-Place |Team or User | Score | Summary of Model
---- | --- | --- | ---
-1 | VietNam national ORlab | -0.201322 | We considered the problem as a dynamic optimization problem. The problem at each step was modeled as a linear programming (LP). We selected Ortools to solve LP model optimally because it seemed to be the fastest and easy to install on docker.
-2 | ironbar | -0.199243 | My solution is based on simplificatoin of the period, dynamic programming, and intelligent pruning of the actions.
-3 | Helios | -0.198155 | Formulate a linear programming model for the optimization problem at each step with forecast data and use an open-source tool, which can be installed by pip to solve it. Scatter the energy charged (or discharged) among steps to avoid buying superfluous energy due to the uncertainty of next forecasts.
-
-**[Interview with winners](https://drivendata.co/blog/power-laws-optimization-winners/)**
-
----
-
-<a href="https://www.drivendata.org">
-    <img src="https://s3.amazonaws.com/drivendata-public-assets/logo-white-blue.png"/>
-</a>
-
+## 👥 Authors
+* **Hoa Nguyen Phuong** - Computer Science Graduate, FPT University.
+* **Huyen Tran Ngoc Nhat** - Computer Science Graduate, FPT University.
