@@ -1,15 +1,15 @@
-# 🏆 Power Laws: Optimizing Demand-side Strategies (3rd Place Solution)
+# Power Laws: Optimizing Demand-side Strategies (3rd Place Solution)
 
 This repository contains the **3rd place winning solution** for the [Power Laws: Optimizing Demand-side Strategies](https://www.drivendata.org/competitions/53/optimize-photovoltaic-battery/) competition hosted by DrivenData.
 
-## 🌟 Achievement
+## Achievement
 * **Rank:** 3rd Place worldwide out of 350+ participants.
 * **Winner Spotlight:** Featured in the official DrivenData blog post: [Meet the Winners: Power Laws Optimization](https://drivendata.co/blog/power-laws-optimization-winners).
 
-## 📖 Project Overview
+## Project Overview
 The goal of this competition was to develop an algorithm to optimize the charging and discharging of a battery system. The objective is to minimize electricity costs for a building by effectively using solar energy (PV) and managing grid consumption based on load forecasts.
 
-## 🛠 Technical Approach
+## Technical Approach
 Our solution focuses on robust optimization using Linear Programming to handle the uncertainty of energy forecasts.
 
 ### 1. Linear Programming Model
@@ -23,12 +23,12 @@ To mitigate the risk of forecast errors, we implemented a "scattering" technique
 ### 3. Data Refinement
 * **PV Forecast Cleaning:** We implemented logic to filter noise in PV forecasts, such as setting values below 20 (often found at midnight in raw forecasts) to zero to prevent irrational battery behavior.
 
-## 📂 Repository Structure
+## Repository Structure
 * `solution/`: Core logic including `battery_controller.py`.
 * `simulation_engine/`: The environment provided by DrivenData to test and evaluate the model.
 * `docs/`: Full technical documentation and methodology write-up.
 
-## 🚀 How to Run
+## How to Run
 1.  **Install dependencies:**
     ```bash
     pip install ortools
@@ -37,6 +37,6 @@ To mitigate the risk of forecast errors, we implemented a "scattering" technique
 2.  **Execute simulation:**
     Navigate to the `simulation_engine` directory and run the engine to see the controller in action.
 
-## 👥 Authors
+## Authors
 * **Hoa Nguyen Phuong** - Computer Science Graduate, FPT University.
 * **Huyen Tran Ngoc Nhat** - Computer Science Graduate, FPT University.
